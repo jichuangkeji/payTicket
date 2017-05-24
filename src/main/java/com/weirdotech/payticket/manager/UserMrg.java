@@ -1,32 +1,40 @@
-package com.weirdotech.payticket.model;
+package com.weirdotech.payticket.manager;
 
+import android.content.Context;
+
+import com.weirdotech.payticket.PayTicketApplication;
 import com.weirdotech.payticket.bean.LoginBody;
 import com.weirdotech.payticket.bean.LoginResult;
 import com.weirdotech.payticket.bean.RegisterBody;
 import com.weirdotech.payticket.bean.RegisterResult;
 import com.weirdotech.payticket.service.IUserService;
 import com.weirdotech.payticket.service.RetrofitWrapper;
+import com.weirdotech.payticket.utils.PreferenceUtils;
 
 import retrofit2.Call;
+
+import static com.weirdotech.payticket.constant.UserConstant.IS_PREV_LOGIN;
 
 /**
  * Created by Bingo on 17/5/17.
  */
-public class UserModel {
+public class UserMrg {
 
-    private static UserModel sInstance;
+    private static UserMrg sInstance;
     private IUserService mUserService;
     private LoginResult mLoginedRsult;
+    private Context mContext;
 
-    public static UserModel getInstance() {
+    public static UserMrg getInstance() {
         if(sInstance == null) {
-            sInstance = new UserModel();
+            sInstance = new UserMrg();
         }
         return sInstance;
     }
 
-    private UserModel() {
+    private UserMrg() {
         mUserService = RetrofitWrapper.getInstance().create(IUserService.class);
+        mContext = PayTicketApplication.getContext();
     }
 
     public Call<RegisterResult> register(RegisterBody body) {
@@ -35,6 +43,10 @@ public class UserModel {
 
     public Call<LoginResult> login(LoginBody body) {
         return mUserService.login(body);
+    }
+
+    public boolean isPrevLogin() {
+        return PreferenceUtils.getPrefBoolean(mContext, IS_PREV_LOGIN, false);
     }
 
 }

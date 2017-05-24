@@ -1,4 +1,4 @@
-package com.weirdotech.payticket.model;
+package com.weirdotech.payticket.manager;
 
 import com.weirdotech.payticket.bean.PayTicketInfo;
 import com.weirdotech.payticket.service.IPayTicketService;
@@ -9,18 +9,18 @@ import retrofit2.Call;
 /**
  * Created by Bingo on 17/5/17.
  */
-public class PayTicketModel {
-    private static PayTicketModel sInstance;
+public class PayTicketMrg {
+    private static PayTicketMrg sInstance;
     private IPayTicketService mPayTicketSerice;
 
-    public static PayTicketModel getInstance() {
+    public static PayTicketMrg getInstance() {
         if(sInstance == null) {
-            sInstance = new PayTicketModel();
+            sInstance = new PayTicketMrg();
         }
         return sInstance;
     }
 
-    private PayTicketModel() {
+    private PayTicketMrg() {
         mPayTicketSerice = RetrofitWrapper.getInstance().create(IPayTicketService.class);
     }
 
