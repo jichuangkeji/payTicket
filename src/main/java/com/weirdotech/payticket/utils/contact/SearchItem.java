@@ -6,11 +6,6 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 
-import com.starnet.contactservice.ContactService;
-import com.starnet.contactservice.search.SearchUtils;
-import com.starnet.vsdk.vbase.logger.LogManager;
-import com.starnet.vsdk.vbase.logger.Logger;
-
 import java.util.List;
 
 
@@ -19,7 +14,6 @@ import java.util.List;
  */
 public class SearchItem implements IContactSimple {
     private static final String TAG = "SearchItem";
-    private static final Logger logger = LogManager.getLogger(ContactService.MODEL_NAME);
 
     @Override
     public int compareTo(Object another) {
@@ -44,7 +38,7 @@ public class SearchItem implements IContactSimple {
     }
 
     private static class FixedData {
-        private IContactSimple mContactSimple;
+        private BaseContactItem mContactSimple;
         // 拼音和首字母 T9 数字
         private String mPinyinT9;
         private String mPinyinAbbrT9;
@@ -64,7 +58,7 @@ public class SearchItem implements IContactSimple {
     private int mNameMatchStart = -1;
     private int mNameMatchEnd = -1;
 
-    public SearchItem(IContactSimple contactSimple) {
+    public SearchItem(BaseContactItem contactSimple) {
         mFixedData = new FixedData();
         mFixedData.mContactSimple = contactSimple;
         initData();
@@ -78,8 +72,8 @@ public class SearchItem implements IContactSimple {
     private void initData() {
         scored = 0;
 
-        mFixedData.mPinyinT9 = SearchUtils.getT9(getPinyin());
-        mFixedData.mPinyinAbbrT9 = SearchUtils.getT9(getPinyinAbbr());
+//        mFixedData.mPinyinT9 = SearchUtils.getT9(getPinyin());
+//        mFixedData.mPinyinAbbrT9 = SearchUtils.getT9(getPinyinAbbr());
     }
 
     @Override

@@ -10,7 +10,6 @@ import com.weirdotech.payticket.R;
 import com.weirdotech.payticket.fragment.TabFragment1;
 import com.weirdotech.payticket.fragment.TabFragment2;
 import com.weirdotech.payticket.fragment.TabFragment3;
-import com.weirdotech.payticket.fragment.TabFragment4;
 import com.weirdotech.widgets.bottomtab.BottomTabBaseActivity;
 import com.weirdotech.widgets.bottomtab.BottomTabView;
 
@@ -31,10 +30,10 @@ public class HomeActivity extends BottomTabBaseActivity {
 
         List<BottomTabView.TabItemView> tabItemViews = new ArrayList<>();
 
-        tabItemViews.add(new BottomTabView.TabItemView(
-                context, context.getString(R.string.home),
-                norColor, pressColor,
-                R.drawable.home_icon, R.drawable.home_icon));
+//        tabItemViews.add(new BottomTabView.TabItemView(
+//                context, context.getString(R.string.home),
+//                norColor, pressColor,
+//                R.drawable.home_icon, R.drawable.home_icon));
 
         tabItemViews.add(new BottomTabView.TabItemView(
                 context, context.getString(R.string.search),
@@ -61,7 +60,7 @@ public class HomeActivity extends BottomTabBaseActivity {
         fragments.add(new TabFragment1());
         fragments.add(new TabFragment2());
         fragments.add(new TabFragment3());
-        fragments.add(new TabFragment4());
+//        fragments.add(new TabFragment4());
 
         return fragments;
     }
@@ -70,6 +69,6 @@ public class HomeActivity extends BottomTabBaseActivity {
     protected View getCenterView() {
         View view = LayoutInflater.from(this).inflate(R.layout.home_center_view_layout, null);
         ImageView centerView = (ImageView)view.findViewById(R.id.centerView);
-        return view;
+        return null;
     }
 }

@@ -5,4 +5,7 @@
     <string name="search">Search</string>
     <string name="notify">Notify</string>
     <string name="me">Me</string>
+
+    //Dimen
+    <string name="login_input_width_percent">70%w</string>
 </resources>

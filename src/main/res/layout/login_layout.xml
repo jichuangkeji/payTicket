@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.android.percent.support.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="PayTicket"
+        android:textColor="#01aaff"
+        android:textSize="40sp"
+        app:layout_marginTopPercent="12%h"/>
+
+    <!--  手机或者邮箱 -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/emailLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_marginTopPercent="10%h"
+        app:layout_widthPercent="@string/login_input_width_percent"
+        android:layout_gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/emailEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="邮箱"
+            android:inputType="textEmailAddress" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <!--  密码 -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/emailLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_marginTopPercent="2%h"
+        app:layout_widthPercent="@string/login_input_width_percent"
+        android:layout_gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/passwordEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="密码"
+            android:inputType="textPassword" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/loginBtn"
+        style="@style/loginBtnStyle"
+        android:text="登录"
+        />
+
+    <TextView
+        android:id="@+id/signUpBtn"
+        style="@style/loginBtnStyle"
+        android:text="注册"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/noAccTipBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/loginTipStyle"
+        android:text="没有账户?去注册"
+        />
+
+    <TextView
+        android:id="@+id/hasAccTipBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/loginTipStyle"
+        android:text="已有账户?去登录"
+        android:visibility="gone"
+        />
+
+</com.zhy.android.percent.support.PercentLinearLayout>

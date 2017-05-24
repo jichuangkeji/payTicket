@@ -1,11 +1,6 @@
 package com.weirdotech.payticket.utils.contact;
 
-import com.starnet.contactservice.callog.CalllogType;
-import com.starnet.contactservice.utils.LookupPrefix;
 
-/**
- * Created by joans on 16-11-19.
- */
 public class CalllogItem extends BaseContactItem {
     private CalllogType mType;
     private long mDate;

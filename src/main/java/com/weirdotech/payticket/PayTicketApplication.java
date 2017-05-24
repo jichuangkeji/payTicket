@@ -10,6 +10,7 @@ import com.weirdotech.payticket.utils.Log;
  */
 public class PayTicketApplication extends Application {
     private static final String TAG = PayTicketApplication.class.getSimpleName();
+    public static final String MODULE_NAME = "PayTicket";
     private static Context sContext;
 
     @Override
