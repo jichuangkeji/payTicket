@@ -11,7 +11,7 @@
 
     <style name="loginTipStyle">
         <item name="android:textColor">#00F</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="com.weirdotech.payticket:layout_widthPercent">@string/login_input_width_percent</item>

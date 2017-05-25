@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.weirdotech.payticket.R;
+import com.weirdotech.payticket.utils.AnimationUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -29,6 +30,12 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.signUpBtn)
     protected View mSignUpBtn;
 
+    @Bind(R.id.loginLayout)
+    protected View mLoginLayout;
+
+    @Bind(R.id.signUpLayout)
+    protected View mSignUpLayout;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +49,9 @@ public class LoginActivity extends AppCompatActivity {
         mHasAccBtn.setVisibility(View.VISIBLE);
         mLoginBtn.setVisibility(View.GONE);
         mSignUpBtn.setVisibility(View.VISIBLE);
+
+        AnimationUtils.fadeSize(mLoginLayout, 1f, 0f);
+        AnimationUtils.fadeSize(mSignUpLayout, 0f, 1f);
     }
 
     @OnClick(R.id.hasAccTipBtn)
@@ -50,5 +60,10 @@ public class LoginActivity extends AppCompatActivity {
         mHasAccBtn.setVisibility(View.GONE);
         mLoginBtn.setVisibility(View.VISIBLE);
         mSignUpBtn.setVisibility(View.GONE);
+
+        AnimationUtils.fadeSize(mLoginLayout, 0f, 1f);
+        AnimationUtils.fadeSize(mSignUpLayout, 1f, 0f);
     }
+
+
 }

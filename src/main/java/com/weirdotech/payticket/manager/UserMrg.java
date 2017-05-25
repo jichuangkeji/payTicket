@@ -46,7 +46,7 @@ public class UserMrg {
     }
 
     public boolean isPrevLogin() {
-        return PreferenceUtils.getPrefBoolean(mContext, IS_PREV_LOGIN, false);
+        return PreferenceUtils.getPrefBoolean(mContext, IS_PREV_LOGIN, true);
     }
 
 }
