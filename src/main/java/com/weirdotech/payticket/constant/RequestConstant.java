@@ -19,6 +19,7 @@ public class RequestConstant {
 
     //用户注册 POST
     public static final String LOGIN_PATH         = "user/login";
-
+    public static final String LOGIN_KEY_EMAIL    = "email";
+    public static final String IS_LOGINED    = "isLogined";
 
 }

@@ -32,4 +32,19 @@
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
 
+    <style name="fragTittleStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">18dp</item>
+        <item name="com.weirdotech.payticket:layout_heightPercent">9%h</item>
+        <item name="android:background">@color/primaryBlueColor</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="homeFragsStyle">
+        <item name="android:background">@color/bg_view_gray_color</item>
+    </style>
+
 </resources>

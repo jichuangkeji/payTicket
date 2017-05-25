@@ -4,6 +4,13 @@ package com.weirdotech.payticket.bean;
  * Created by Bingo on 17/5/18.
  */
 public class LoginResult {
+
+    @Override
+    public String toString() {
+        return "[error_code: " + error_code + ", message: "
+                + message + ", code: " + code + ", error_msg: " + error_msg + "]";
+    }
+
     /**
      * error_code : 100
      * message : 账号或密码错误
@@ -137,5 +144,22 @@ public class LoginResult {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public boolean isLogined() {
+        boolean isSuccess = true;
+        //判断成功
+        if(error_code == 0 && code.equals("200")) {
+            isSuccess = true;
+
+        } else if(code == null && error_code == 100) {
+            isSuccess = false;
+        }
+
+        return isSuccess;
+    }
+
+    public String getLoginResultMsg() {
+        return isLogined() ? "登录成功" : "登录失败";
     }
 }

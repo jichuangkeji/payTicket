@@ -163,4 +163,14 @@
         android:text="已有账户?去登录"
         android:visibility="gone" />
 
+    <com.weirdotech.widgets.progress.RoundProgressBar
+        android:id="@+id/waitProgress"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:roundColor="#77e3e3e3"
+        app:roundProgressColor="@color/primaryBlueColor"
+        app:roundWidth="4dp"
+        android:visibility="gone"
+        />
+
 </com.zhy.android.percent.support.PercentLinearLayout>

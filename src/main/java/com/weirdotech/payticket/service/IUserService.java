@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
+import static com.weirdotech.payticket.constant.RequestConstant.LOGIN_PATH;
 import static com.weirdotech.payticket.constant.RequestConstant.REGISTER_PATH;
 
 /**
@@ -21,8 +22,7 @@ public interface IUserService {
     @POST(REGISTER_PATH)
     Call<RegisterResult> register(@Body RegisterBody body);
 
-    @FormUrlEncoded
-    @POST(REGISTER_PATH)
+    @POST(LOGIN_PATH)
     Call<LoginResult> login(@Body LoginBody body);
 
 }

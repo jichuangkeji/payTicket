@@ -12,6 +12,7 @@ import com.weirdotech.payticket.service.RetrofitWrapper;
 import com.weirdotech.payticket.utils.PreferenceUtils;
 
 import retrofit2.Call;
+import static com.weirdotech.payticket.constant.RequestConstant.*;
 
 import static com.weirdotech.payticket.constant.UserConstant.IS_PREV_LOGIN;
 
@@ -46,7 +47,23 @@ public class UserMrg {
     }
 
     public boolean isPrevLogin() {
-        return PreferenceUtils.getPrefBoolean(mContext, IS_PREV_LOGIN, true);
+        return PreferenceUtils.getPrefBoolean(mContext, IS_PREV_LOGIN, false);
+    }
+
+    public void saveLoginBody(LoginBody body) {
+        PreferenceUtils.setPrefString(mContext, LOGIN_KEY_EMAIL, body.email);
+    }
+
+    public void saveLoginStatus(boolean isLogined) {
+        PreferenceUtils.setPrefBoolean(mContext, IS_LOGINED, isLogined);
+    }
+
+    public boolean isLogined() {
+        return PreferenceUtils.getPrefBoolean(mContext, IS_LOGINED, false);
+    }
+
+    public String getEmail() {
+        return PreferenceUtils.getPrefString(mContext, LOGIN_KEY_EMAIL, "");
     }
 
 }

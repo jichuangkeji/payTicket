@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.weirdotech.payticket.R;
+import com.weirdotech.payticket.fragment.MeFragment;
 import com.weirdotech.payticket.fragment.TabFragment1;
 import com.weirdotech.payticket.fragment.TabFragment2;
-import com.weirdotech.payticket.fragment.TabFragment3;
 import com.weirdotech.widgets.bottomtab.BottomTabBaseActivity;
 import com.weirdotech.widgets.bottomtab.BottomTabView;
 
@@ -24,8 +24,8 @@ public class HomeActivity extends BottomTabBaseActivity {
 
     @Override
     protected List<BottomTabView.TabItemView> getTabViews() {
-        int norColor = R.color.colorPrimary;
-        int pressColor = R.color.colorGreen;
+        int norColor = R.color.icon_text_gray_color;
+        int pressColor = R.color.primaryBlueColor;
         Context context = this;
 
         List<BottomTabView.TabItemView> tabItemViews = new ArrayList<>();
@@ -57,9 +57,10 @@ public class HomeActivity extends BottomTabBaseActivity {
     protected List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
 
+        fragments.add(new MeFragment());
         fragments.add(new TabFragment1());
         fragments.add(new TabFragment2());
-        fragments.add(new TabFragment3());
+
 //        fragments.add(new TabFragment4());
 
         return fragments;
