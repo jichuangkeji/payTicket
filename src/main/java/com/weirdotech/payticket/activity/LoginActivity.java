@@ -36,6 +36,12 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.hasAccTipBtn)
     protected View mHasAccBtn;
 
+    @Bind(R.id.forgetPasswdTopBtn)
+    protected View mForgetPasswdBtn;
+
+    @Bind(R.id.tip1Layout)
+    protected View mTipLayout;
+
     @Bind(R.id.loginBtn)
     protected View mLoginBtn;
 
@@ -57,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.passwordEdit)
     protected EditText mPasswdEdit;
 
+
     private ProgressDialog mWaitDialog;
 
     @Override
@@ -75,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.noAccTipBtn)
     public void onNoAccTipBtnClick() {
-        mNoAccBtn.setVisibility(View.GONE);
+        mTipLayout.setVisibility(View.GONE);
         mHasAccBtn.setVisibility(View.VISIBLE);
         mLoginBtn.setVisibility(View.GONE);
         mSignUpBtn.setVisibility(View.VISIBLE);
@@ -86,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.hasAccTipBtn)
     public void onHasAccTipBtn() {
-        mNoAccBtn.setVisibility(View.VISIBLE);
+        mTipLayout.setVisibility(View.VISIBLE);
         mHasAccBtn.setVisibility(View.GONE);
         mLoginBtn.setVisibility(View.VISIBLE);
         mSignUpBtn.setVisibility(View.GONE);
