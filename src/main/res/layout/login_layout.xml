@@ -170,10 +170,11 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/forgetPasswdTopBtn"
-            style="@style/loginTipStyle"
+            android:id="@+id/forgetPasswdTipBtn"
+            android:textSize="13sp"
             android:layout_weight="1"
             android:layout_gravity="left"
+            android:gravity="left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#f00"
@@ -181,9 +182,10 @@
 
         <TextView
             android:id="@+id/noAccTipBtn"
-            style="@style/loginTipStyle"
+            android:textSize="13sp"
             android:layout_weight="1"
             android:layout_gravity="right"
+            android:gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#00f"

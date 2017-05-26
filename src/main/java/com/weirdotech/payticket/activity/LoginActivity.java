@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.hasAccTipBtn)
     protected View mHasAccBtn;
 
-    @Bind(R.id.forgetPasswdTopBtn)
+    @Bind(R.id.forgetPasswdTipBtn)
     protected View mForgetPasswdBtn;
 
     @Bind(R.id.tip1Layout)
@@ -100,6 +100,11 @@ public class LoginActivity extends AppCompatActivity {
 
         AnimationUtils.fadeSize(mLoginLayout, 0f, 1f);
         AnimationUtils.fadeSize(mSignUpLayout, 1f, 0f);
+    }
+
+    @OnClick(R.id.forgetPasswdTipBtn)
+    public void onForgetPasswdBtnClick() {
+        Toast.makeText(this, "忘记密码 Under Develop", Toast.LENGTH_SHORT).show();
     }
 
     private void showWaitDialog() {
