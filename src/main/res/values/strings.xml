@@ -8,4 +8,11 @@
 
     //Dimen
     <string name="login_input_width_percent">70%w</string>
+
+    <string name="divider_color">0xDED9D8</string>
+
+    <string name="me_item_margin_top_percent">1%h</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
 </resources>

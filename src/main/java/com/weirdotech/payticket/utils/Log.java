@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.lang.reflect.Method;
 
-public class Log {
+public class    Log {
 
     private static String TAG = Log.class.getCanonicalName();
     private static int LOG_LEVEL = 5;

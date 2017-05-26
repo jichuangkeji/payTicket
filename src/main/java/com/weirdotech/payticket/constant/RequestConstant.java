@@ -22,4 +22,7 @@ public class RequestConstant {
     public static final String LOGIN_KEY_EMAIL    = "email";
     public static final String IS_LOGINED    = "isLogined";
 
+    //用户注销 GET
+    public static final String LOGOUT_PATH        = "user/logout";
+
 }

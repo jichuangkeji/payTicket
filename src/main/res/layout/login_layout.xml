@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -14,9 +15,20 @@
         android:textSize="40sp"
         app:layout_marginTopPercent="12%h" />
 
+    <ImageView
+        app:layout_widthPercent="40%w"
+        app:layout_heightPercent="40%w"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hello_log"
+        app:layout_marginTopPercent="6%h"
+        />
+
     <!-- 登录 -->
     <com.zhy.android.percent.support.PercentLinearLayout
-        app:layout_marginTopPercent="10%h"
+        app:layout_marginTopPercent="6%h"
         android:id="@+id/loginLayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -58,7 +70,7 @@
 
     <!-- 注册 -->
     <com.zhy.android.percent.support.PercentLinearLayout
-        app:layout_marginTopPercent="10%h"
+        app:layout_marginTopPercent="6%h"
         android:visibility="gone"
         android:id="@+id/signUpLayout"
         android:orientation="vertical"

@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setView() {
         mEmailEdit.setText(UserMrg.getInstance().getEmail());
-        mEmailEdit.setSelection(mEmailEdit.length());
+        mPasswdEdit.requestFocus();
     }
 
     @OnClick(R.id.noAccTipBtn)
@@ -124,18 +124,18 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
                 LoginResult result = response.body();
-                UserMrg.getInstance().saveLoginStatus(result.isLogined());
+                UserMrg.getInstance().saveLoginResult(result);
 
                 Toast.makeText(LoginActivity.this, result.getLoginResultMsg(), Toast.LENGTH_SHORT).show();
                 dismissWaitDialog();
 
-                handlerLoginEvent(result.isLogined());
+                handleLoginEvent(result.isLogined());
 
             }
 
             @Override
             public void onFailure(Call<LoginResult> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "登录失败111 t: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 dismissWaitDialog();
 
             }
@@ -143,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void handlerLoginEvent(boolean isLogined) {
+    private void handleLoginEvent(boolean isLogined) {
         if(isLogined) {
             MainThread.getInstance().postDelayed(new Runnable() {
                 @Override
