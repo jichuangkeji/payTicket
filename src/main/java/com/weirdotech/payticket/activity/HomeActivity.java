@@ -8,8 +8,8 @@ import android.widget.ImageView;
 
 import com.weirdotech.payticket.R;
 import com.weirdotech.payticket.fragment.MeFragment;
-import com.weirdotech.payticket.fragment.TabFragment1;
-import com.weirdotech.payticket.fragment.TabFragment2;
+import com.weirdotech.payticket.fragment.NotifyFragment;
+import com.weirdotech.payticket.fragment.SearchFragment;
 import com.weirdotech.widgets.bottomtab.BottomTabBaseActivity;
 import com.weirdotech.widgets.bottomtab.BottomTabView;
 
@@ -36,7 +36,7 @@ public class HomeActivity extends BottomTabBaseActivity {
 //                R.drawable.home_icon, R.drawable.home_icon));
 
         tabItemViews.add(new BottomTabView.TabItemView(
-                context, context.getString(R.string.search),
+                context, context.getString(R.string.query),
                 norColor, pressColor,
                 R.drawable.search_icon, R.drawable.search_icon));
 
@@ -57,11 +57,9 @@ public class HomeActivity extends BottomTabBaseActivity {
     protected List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
 
+        fragments.add(new SearchFragment());
+        fragments.add(new NotifyFragment());
         fragments.add(new MeFragment());
-        fragments.add(new TabFragment1());
-        fragments.add(new TabFragment2());
-
-//        fragments.add(new TabFragment4());
 
         return fragments;
     }

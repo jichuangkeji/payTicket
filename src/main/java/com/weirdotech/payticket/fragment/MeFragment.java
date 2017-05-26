@@ -65,6 +65,7 @@ public class MeFragment extends Fragment {
         return rootView;
     }
 
+
     private void initModel() {
         mUserMrg = UserMrg.getInstance();
     }
