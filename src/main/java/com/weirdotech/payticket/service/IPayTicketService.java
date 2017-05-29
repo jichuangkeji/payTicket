@@ -6,7 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-import static com.weirdotech.payticket.constant.RequestConstant.LIST_TICKET_PATH;
+import static com.weirdotech.payticket.constant.RequestConstant.LIST_TICKET_PLATE_PATH;
 import static com.weirdotech.payticket.constant.RequestConstant.QUERY_KEY;
 
 /**
@@ -14,6 +14,6 @@ import static com.weirdotech.payticket.constant.RequestConstant.QUERY_KEY;
  */
 public interface IPayTicketService {
 
-    @GET(LIST_TICKET_PATH)
+    @GET(LIST_TICKET_PLATE_PATH)
     Call<PayTicketInfo> listTickets(@Path(QUERY_KEY) String queryKey);
 }

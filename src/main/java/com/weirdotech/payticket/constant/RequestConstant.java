@@ -8,7 +8,11 @@ public class RequestConstant {
 
     //查询罚单 QUERY
     public static final String QUERY_KEY        = "queryKey";
-    public static final String LIST_TICKET_PATH = "ticket_list/plate/{" + QUERY_KEY + "}";
+    //根据车牌
+    public static final String LIST_TICKET_PLATE_PATH = "ticket_list/plate/{" + QUERY_KEY + "}";
+
+    //根据罚单号
+    public static final String LIST_TICKET_NUM_PATH = "ticket_list/ticket_num/{" + QUERY_KEY + "}";
 
     //用户注册 POST
     public static final String REGISTER_PATH         = "user/register";

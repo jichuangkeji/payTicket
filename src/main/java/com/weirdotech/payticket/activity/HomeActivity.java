@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import com.weirdotech.payticket.R;
 import com.weirdotech.payticket.fragment.MeFragment;
 import com.weirdotech.payticket.fragment.NotifyFragment;
-import com.weirdotech.payticket.fragment.SearchFragment;
+import com.weirdotech.payticket.fragment.QueryFragment;
 import com.weirdotech.widgets.bottomtab.BottomTabBaseActivity;
 import com.weirdotech.widgets.bottomtab.BottomTabView;
 
@@ -57,7 +57,7 @@ public class HomeActivity extends BottomTabBaseActivity {
     protected List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
 
-        fragments.add(new SearchFragment());
+        fragments.add(new QueryFragment());
         fragments.add(new NotifyFragment());
         fragments.add(new MeFragment());
 

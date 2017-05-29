@@ -174,8 +174,12 @@ public class ContactProviderUtils {
     public static void startSearch(Context context, String searchKey, String searchType) {
         Uri uri = Uri.parse(HOST + AUTHORITY + "/" + GET_DO_SEARCH);
 
-        context.getContentResolver().query(uri,
+        Cursor cursor = context.getContentResolver().query(uri,
                 new String[]{GET_DO_SEARCH}, null, new String[]{searchKey, searchType}, null);
+
+        if(cursor != null) {
+            cursor.close();
+        }
 
     }
 
