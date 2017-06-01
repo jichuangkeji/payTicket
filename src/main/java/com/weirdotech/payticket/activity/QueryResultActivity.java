@@ -25,6 +25,13 @@ public class QueryResultActivity extends TopBarBaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         ButterKnife.bind(this);
+        setTopLeftButton(new OnClickListener() {
+            @Override
+            public void onClick() {
+                finish();
+            }
+        });
+        setTitle(getString(R.string.search_result_title));
     }
 
     @OnClick(R.id.payBtn)

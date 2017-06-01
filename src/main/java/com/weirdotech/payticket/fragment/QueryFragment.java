@@ -120,8 +120,8 @@ public class QueryFragment extends Fragment {
         @Override
         public void onNext(PayTicketInfo payTicketInfo) {
             int listSize = payTicketInfo.getData().size();
-            Toast.makeText(getContext(), "查询成功 ! size: " + listSize + ", code: " + payTicketInfo.getCode()
-                    , Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), "查询成功 ! size: " + listSize + ", code: " + payTicketInfo.getCode()
+//                    , Toast.LENGTH_SHORT).show();
 
             //进行查询信息的显示
             Intent intent = new Intent(getContext(), QueryResultActivity.class);
