@@ -4,14 +4,16 @@ import com.weirdotech.payticket.bean.PayTicketInfo;
 import com.weirdotech.payticket.service.IPayTicketService;
 import com.weirdotech.payticket.service.RetrofitWrapper;
 
-import retrofit2.Call;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Bingo on 17/5/17.
  */
 public class PayTicketMrg {
     private static PayTicketMrg sInstance;
-    private IPayTicketService mPayTicketSerice;
+    private IPayTicketService mPayTicketService;
 
     public static PayTicketMrg getInstance() {
         if(sInstance == null) {
@@ -21,11 +23,14 @@ public class PayTicketMrg {
     }
 
     private PayTicketMrg() {
-        mPayTicketSerice = RetrofitWrapper.getInstance().create(IPayTicketService.class);
+        mPayTicketService = RetrofitWrapper.getInstance().create(IPayTicketService.class);
     }
 
-    public Call<PayTicketInfo> listTickets(String queryKey) {
-        return mPayTicketSerice.listTickets(queryKey);
+    public void listTickets(String searchKey, Subscriber<PayTicketInfo> subscriber) {
+        mPayTicketService.listTickets(searchKey)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
     }
 
 

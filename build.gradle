@@ -44,6 +44,7 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'//ConverterFactory的Gson依赖包
     compile 'com.squareup.retrofit2:converter-scalars:2.1.0'//ConverterFactory的String依赖包
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
 
 //    compile 'com.jakewharton:butterknife:8.1.0'
 //    apt 'com.jakewharton:butterknife-compiler:8.1.0'//增加这一句
@@ -69,9 +70,11 @@ dependencies {
     compile 'cn.bingoogolapple:bga-zxing:1.1.4@aar'
 
     //rxjava
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    // Because RxAndroid releases are few and far between, it is recommended you also
-    // explicitly depend on RxJava's latest version for bug fixes and new features.
-    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+//    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+//    // Because RxAndroid releases are few and far between, it is recommended you also
+//    // explicitly depend on RxJava's latest version for bug fixes and new features.
+//    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+    compile 'io.reactivex:rxjava:1.0.9'
+    compile 'io.reactivex:rxandroid:0.24.0'
 
 }

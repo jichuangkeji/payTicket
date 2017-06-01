@@ -7,12 +7,12 @@ public class RequestConstant {
     public static final String SERVER_URL = "https://www.guufar.com/api/";
 
     //查询罚单 QUERY
-    public static final String QUERY_KEY        = "queryKey";
+    public static final String SEARCH_KEY = "searchKey";
     //根据车牌
-    public static final String LIST_TICKET_PLATE_PATH = "ticket_list/plate/{" + QUERY_KEY + "}";
+    public static final String LIST_TICKET_PLATE_PATH = "ticket_list/plate/{" + SEARCH_KEY + "}";
 
     //根据罚单号
-    public static final String LIST_TICKET_NUM_PATH = "ticket_list/ticket_num/{" + QUERY_KEY + "}";
+    public static final String LIST_TICKET_NUM_PATH = "ticket_list/ticket_num/{" + SEARCH_KEY + "}";
 
     //用户注册 POST
     public static final String REGISTER_PATH         = "user/register";

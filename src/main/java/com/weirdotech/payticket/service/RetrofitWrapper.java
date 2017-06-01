@@ -3,6 +3,7 @@ package com.weirdotech.payticket.service;
 import com.weirdotech.payticket.constant.RequestConstant;
 
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -20,7 +21,9 @@ public class RetrofitWrapper {
     }
 
     private RetrofitWrapper() {
-        mRetrofit = new Retrofit.Builder().baseUrl(RequestConstant.SERVER_URL)
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl(RequestConstant.SERVER_URL)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create()).build();
     }
 

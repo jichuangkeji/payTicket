@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/query_result_bg">
+
+
+    <ListView
+        android:id="@+id/payInfoLv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_heightPercent="92%h"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color"
+        />
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_heightPercent="8%h">
+
+        <CheckBox
+            android:id="@+id/allSelectBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全选"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="合计："
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:textColor="#000"
+            android:layout_toLeftOf="@+id/totalPriceTv"
+            />
+
+        <TextView
+            android:id="@+id/totalPriceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="$0.00"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:layout_centerVertical="true"
+            android:textColor="#f00"
+            android:layout_toLeftOf="@+id/payBtn"
+            app:layout_marginRightPercent="2.5%w"
+            />
+        <TextView
+            android:id="@+id/payBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="30%w"
+            android:text="结算"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            android:clickable="true"
+            android:textColor="#fff"
+            android:background="@drawable/pay_btn_bg_selector"
+            android:layout_alignParentRight="true"
+            />
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+</com.zhy.android.percent.support.PercentLinearLayout>
