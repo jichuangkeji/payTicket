@@ -16,7 +16,7 @@ import com.weirdotech.payticket.bean.RegisterResult;
 import com.weirdotech.payticket.manager.UserMrg;
 import com.weirdotech.payticket.utils.AnimationUtils;
 import com.weirdotech.payticket.utils.MainThread;
-import com.weirdotech.payticket.utils.WaitDialogUtils;
+import com.weirdotech.payticket.utils.dialog.WaitDialogUtils;
 import com.weirdotech.widgets.progress.RoundProgressBar;
 
 import butterknife.Bind;
@@ -161,9 +161,15 @@ public class LoginActivity extends AppCompatActivity {
 
                         mUserMrg.saveLoginResult(loginResult);
 
-                        Toast.makeText(LoginActivity.this, loginResult.getLoginResultMsg(), Toast.LENGTH_SHORT).show();
+                        if (loginResult.isLogined()) {
+                            handleLoginEvent();
+                            Toast.makeText(LoginActivity.this, loginResult.getLoginResultMsg(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(LoginActivity.this, loginResult.toString(), Toast.LENGTH_SHORT).show();
+                        }
 
-                        handleLoginEvent(loginResult.isLogined());
+
+
                     }
                 });
     }
@@ -171,16 +177,16 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.registerBtn)
     public void onRegisterBtnClick() {
         // TODO: 17/6/3  进行账户有效性的判断
-        
-        if(isValidRegisterInfo()) {
+
+        if (isValidRegisterInfo()) {
             register();
-            
+
         } else {
             // TODO: 17/6/3
         }
-        
+
     }
-    
+
     private boolean isValidRegisterInfo() {
         // TODO: 17/6/3  
         return true;
@@ -195,6 +201,13 @@ public class LoginActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<RegisterResult>() {
+
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        WaitDialogUtils.show(TAG, LoginActivity.this);
+                    }
+
                     @Override
                     public void onCompleted() {
 
@@ -202,29 +215,38 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
+                        WaitDialogUtils.hide(TAG);
+                        Toast.makeText(LoginActivity.this, "注册失败,原因： " + e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onNext(RegisterResult registerResult) {
+                        WaitDialogUtils.hide(TAG);
 
+
+                        if (registerResult.getStatus_code() == 200) {
+                            Toast.makeText(LoginActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            Toast.makeText(LoginActivity.this, "注册失败, 原因：" + registerResult.toString(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }
 
-    private void handleLoginEvent(boolean isLogined) {
-        if(isLogined) {
-            MainThread.getInstance().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
+    private void handleLoginEvent() {
+        MainThread.getInstance().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(intent);
 
-                    finish();
-                }
-            }, 500);
+                finish();
+            }
+        }, 500);
 
-        }
     }
 
 

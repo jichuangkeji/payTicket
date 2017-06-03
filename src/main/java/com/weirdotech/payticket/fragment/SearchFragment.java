@@ -19,7 +19,7 @@ import com.weirdotech.payticket.bean.PayTicketInfo;
 import com.weirdotech.payticket.constant.Constants;
 import com.weirdotech.payticket.manager.PayTicketMrg;
 import com.weirdotech.payticket.utils.Log;
-import com.weirdotech.payticket.utils.WaitDialogUtils;
+import com.weirdotech.payticket.utils.dialog.WaitDialogUtils;
 import com.weirdotech.payticket.webconf.ConfContactMrg;
 import com.weirdotech.payticket.webconf.ContactAdapter;
 import com.weirdotech.payticket.webconf.LoginResult;

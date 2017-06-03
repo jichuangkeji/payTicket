@@ -1,4 +1,4 @@
-package com.weirdotech.payticket.utils;
+package com.weirdotech.payticket.utils.dialog;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 /**
  * Created by Bingo on 17/6/1.
+ * 显示等待进度的对话框
  */
 public class WaitDialogUtils {
     private static HashMap<String, Dialog> sDialogMap = new HashMap<>();

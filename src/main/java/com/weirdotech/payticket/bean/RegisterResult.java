@@ -32,4 +32,9 @@ public class RegisterResult {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "[code : " + status_code + ", msg: " + message +"]";
+    }
 }
