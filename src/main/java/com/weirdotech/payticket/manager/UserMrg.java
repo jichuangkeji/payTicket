@@ -14,6 +14,7 @@ import com.weirdotech.payticket.utils.PreferenceUtils;
 import com.weirdotech.payticket.utils.StringUtils;
 
 import retrofit2.Call;
+import rx.Observable;
 
 import static com.weirdotech.payticket.constant.RequestConstant.IS_LOGINED;
 import static com.weirdotech.payticket.constant.RequestConstant.LOGIN_KEY_EMAIL;
@@ -42,7 +43,7 @@ public class UserMrg {
         mContext = PayTicketApplication.getContext();
     }
 
-    public Call<RegisterResult> register(RegisterBody body) {
+    public Observable<RegisterResult> register(RegisterBody body) {
         return mUserService.register(body);
     }
 

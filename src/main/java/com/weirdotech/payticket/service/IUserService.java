@@ -12,6 +12,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import rx.Observable;
 
 import static com.weirdotech.payticket.constant.RequestConstant.LOGIN_PATH;
 import static com.weirdotech.payticket.constant.RequestConstant.LOGOUT_PATH;
@@ -24,7 +25,7 @@ public interface IUserService {
 
     @FormUrlEncoded
     @POST(REGISTER_PATH)
-    Call<RegisterResult> register(@Body RegisterBody body);
+    Observable<RegisterResult> register(@Body RegisterBody body);
 
     @POST(LOGIN_PATH)
     Call<LoginResult> login(@Body LoginBody body);

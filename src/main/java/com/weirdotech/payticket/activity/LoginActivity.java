@@ -155,6 +155,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @OnClick(R.id.signUpBtn)
+    public void onSignUpBtnClick() {
+
+    }
+
     private void handleLoginEvent(boolean isLogined) {
         if(isLogined) {
             MainThread.getInstance().postDelayed(new Runnable() {
