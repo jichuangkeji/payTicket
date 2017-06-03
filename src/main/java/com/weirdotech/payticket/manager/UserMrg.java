@@ -47,7 +47,7 @@ public class UserMrg {
         return mUserService.register(body);
     }
 
-    public Call<LoginResult> login(LoginBody body) {
+    public Observable<LoginResult> login(LoginBody body) {
         return mUserService.login(body);
     }
 

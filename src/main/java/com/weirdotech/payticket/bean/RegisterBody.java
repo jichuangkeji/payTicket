@@ -9,4 +9,10 @@ public class RegisterBody {
     public String username;
     public String password;
 
+
+    public RegisterBody(String email, String username, String password) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
 }

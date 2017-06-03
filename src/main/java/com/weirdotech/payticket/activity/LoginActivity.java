@@ -1,6 +1,5 @@
 package com.weirdotech.payticket.activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,17 +11,20 @@ import android.widget.Toast;
 import com.weirdotech.payticket.R;
 import com.weirdotech.payticket.bean.LoginBody;
 import com.weirdotech.payticket.bean.LoginResult;
+import com.weirdotech.payticket.bean.RegisterBody;
+import com.weirdotech.payticket.bean.RegisterResult;
 import com.weirdotech.payticket.manager.UserMrg;
 import com.weirdotech.payticket.utils.AnimationUtils;
 import com.weirdotech.payticket.utils.MainThread;
+import com.weirdotech.payticket.utils.WaitDialogUtils;
 import com.weirdotech.widgets.progress.RoundProgressBar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Bingo on 17/5/24.
@@ -45,8 +47,8 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.loginBtn)
     protected View mLoginBtn;
 
-    @Bind(R.id.signUpBtn)
-    protected View mSignUpBtn;
+    @Bind(R.id.registerBtn)
+    protected View mRegisterBtn;
 
     @Bind(R.id.loginLayout)
     protected View mLoginLayout;
@@ -63,8 +65,19 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.passwordEdit)
     protected EditText mPasswdEdit;
 
+    @Bind(R.id.usernameEdit)
+    protected EditText mUsernameTvForReg;
 
-    private ProgressDialog mWaitDialog;
+    @Bind(R.id.emailEditReg)
+    protected EditText mEmailEditReg;
+
+    @Bind(R.id.passwdEditReg)
+    protected EditText mPasswdEditReg;
+
+    @Bind(R.id.passwdEditReg2)
+    protected EditText mPasswdEditReg2;
+
+    private UserMrg mUserMrg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,11 +85,17 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_layout);
         ButterKnife.bind(this);
 
+        initModel();
         setView();
     }
 
+    private void initModel() {
+        mUserMrg = UserMrg.getInstance();
+    }
+
+
     private void setView() {
-        mEmailEdit.setText(UserMrg.getInstance().getEmail());
+        mEmailEdit.setText(mUserMrg.getEmail());
         mPasswdEdit.requestFocus();
     }
 
@@ -85,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         mTipLayout.setVisibility(View.GONE);
         mHasAccBtn.setVisibility(View.VISIBLE);
         mLoginBtn.setVisibility(View.GONE);
-        mSignUpBtn.setVisibility(View.VISIBLE);
+        mRegisterBtn.setVisibility(View.VISIBLE);
 
         AnimationUtils.fadeSize(mLoginLayout, 1f, 0f);
         AnimationUtils.fadeSize(mSignUpLayout, 0f, 1f);
@@ -96,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
         mTipLayout.setVisibility(View.VISIBLE);
         mHasAccBtn.setVisibility(View.GONE);
         mLoginBtn.setVisibility(View.VISIBLE);
-        mSignUpBtn.setVisibility(View.GONE);
+        mRegisterBtn.setVisibility(View.GONE);
 
         AnimationUtils.fadeSize(mLoginLayout, 0f, 1f);
         AnimationUtils.fadeSize(mSignUpLayout, 1f, 0f);
@@ -107,57 +126,90 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(this, "忘记密码 Under Develop", Toast.LENGTH_SHORT).show();
     }
 
-    private void showWaitDialog() {
-        dismissWaitDialog();
-
-        mWaitDialog = new ProgressDialog(this);
-        mWaitDialog.setCancelable(false);
-        mWaitDialog.show();
-    }
-
-    private void dismissWaitDialog() {
-        if(mWaitDialog != null) {
-            mWaitDialog.dismiss();
-        }
-    }
-
     @OnClick(R.id.loginBtn)
     public void onLoginBtnClick() {
         String email = mEmailEdit.getText().toString().trim();
         String password = mPasswdEdit.getText().toString().trim();
         LoginBody body = new LoginBody(email, password);
-        UserMrg.getInstance().saveLoginBody(body);
+        mUserMrg.saveLoginBody(body);
 
-        Call<LoginResult> call = UserMrg.getInstance().login(body);
+        mUserMrg.login(body)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<LoginResult>() {
 
-        showWaitDialog();
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        WaitDialogUtils.show(TAG, LoginActivity.this);
+                    }
 
-        call.enqueue(new Callback<LoginResult>() {
-            @Override
-            public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
-                LoginResult result = response.body();
-                UserMrg.getInstance().saveLoginResult(result);
+                    @Override
+                    public void onCompleted() {
 
-                Toast.makeText(LoginActivity.this, result.getLoginResultMsg(), Toast.LENGTH_SHORT).show();
-                dismissWaitDialog();
+                    }
 
-                handleLoginEvent(result.isLogined());
+                    @Override
+                    public void onError(Throwable e) {
+                        WaitDialogUtils.hide(TAG);
+                        Toast.makeText(LoginActivity.this, "登录失败111 t: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
 
-            }
+                    @Override
+                    public void onNext(LoginResult loginResult) {
+                        WaitDialogUtils.hide(TAG);
 
-            @Override
-            public void onFailure(Call<LoginResult> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "登录失败111 t: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                dismissWaitDialog();
+                        mUserMrg.saveLoginResult(loginResult);
 
-            }
-        });
+                        Toast.makeText(LoginActivity.this, loginResult.getLoginResultMsg(), Toast.LENGTH_SHORT).show();
 
+                        handleLoginEvent(loginResult.isLogined());
+                    }
+                });
     }
 
-    @OnClick(R.id.signUpBtn)
-    public void onSignUpBtnClick() {
+    @OnClick(R.id.registerBtn)
+    public void onRegisterBtnClick() {
+        // TODO: 17/6/3  进行账户有效性的判断
+        
+        if(isValidRegisterInfo()) {
+            register();
+            
+        } else {
+            // TODO: 17/6/3
+        }
+        
+    }
+    
+    private boolean isValidRegisterInfo() {
+        // TODO: 17/6/3  
+        return true;
+    }
 
+    private void register() {
+        String email = mEmailEditReg.getText().toString().trim();
+        String username = mUsernameTvForReg.getText().toString().trim();
+        String password = mPasswdEditReg.getText().toString().trim();
+
+        mUserMrg.register(new RegisterBody(email, username, password))
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<RegisterResult>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(RegisterResult registerResult) {
+
+                    }
+                });
     }
 
     private void handleLoginEvent(boolean isLogined) {

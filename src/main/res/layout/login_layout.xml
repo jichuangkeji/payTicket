@@ -103,7 +103,7 @@
             app:layout_widthPercent="@string/login_input_width_percent">
 
             <EditText
-                android:id="@+id/emailEditSignUp"
+                android:id="@+id/emailEditReg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="邮箱"
@@ -120,7 +120,7 @@
             app:layout_widthPercent="@string/login_input_width_percent">
 
             <EditText
-                android:id="@+id/passwdEditSignUp"
+                android:id="@+id/passwdEditReg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="密码"
@@ -137,7 +137,7 @@
             app:layout_widthPercent="@string/login_input_width_percent">
 
             <EditText
-                android:id="@+id/passwdEditSignUp2"
+                android:id="@+id/passwdEditReg2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="重复密码"
@@ -155,7 +155,7 @@
         android:text="登录" />
 
     <TextView
-        android:id="@+id/signUpBtn"
+        android:id="@+id/registerBtn"
         style="@style/loginBtnStyle"
         android:text="注册"
         android:visibility="gone" />

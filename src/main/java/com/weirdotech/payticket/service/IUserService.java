@@ -28,7 +28,7 @@ public interface IUserService {
     Observable<RegisterResult> register(@Body RegisterBody body);
 
     @POST(LOGIN_PATH)
-    Call<LoginResult> login(@Body LoginBody body);
+    Observable<LoginResult> login(@Body LoginBody body);
 
     @GET(LOGOUT_PATH)
     Call<LogoutResult> logout(@Query("token") String token);
