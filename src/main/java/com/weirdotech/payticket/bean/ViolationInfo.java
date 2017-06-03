@@ -9,6 +9,20 @@ import java.io.Serializable;
 /**
  *  查询出来的罚单的重点内容
  */
+
+/**
+ * violation : 8509254000
+ * view_ticket : http://nycserv.nyc.gov/NYCServWeb/ShowImage?searchID=VDBSVmQwOVVTVEZPUkVGM1RVRTlQUT09
+ * plate_details : 8888 NY MED
+ * issue_date : 01/31/2017
+ * liability : 95.00 负债
+ * pending : 0.00 审核中
+ * violation_description : 20A-No Parking (Non-COM)
+ * name : args.Violations.0.PAYMENTSELECTOR
+ * appear : true
+ * pay_enable : true
+ */
+
 public class ViolationInfo implements Serializable{
     private String violation;
     private String view_ticket;

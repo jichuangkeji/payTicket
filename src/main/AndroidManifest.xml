@@ -28,7 +28,7 @@
 
         <activity android:name=".activity.LoginActivity" />
 
-        <activity android:name=".activity.QueryResultActivity" />
+        <activity android:name=".activity.SearchResultActivity" />
 
     </application>
 

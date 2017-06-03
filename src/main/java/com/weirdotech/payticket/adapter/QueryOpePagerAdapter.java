@@ -38,4 +38,5 @@ public class QueryOpePagerAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {//必须实现，销毁
         container.removeView(mPagers.get(position));
     }
+
 }

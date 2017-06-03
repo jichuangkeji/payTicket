@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="#f00"
+    app:cardCornerRadius="2dp"
+    app:contentPaddingLeft="10dp"
+    app:contentPaddingBottom="5dp">
+
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/violationNumTv"
+            android:layout_centerHorizontal="true"
+            style="@style/violationInfoStyle"
+            />
+
+        <TextView
+            android:id="@+id/plateDetailsTitle"
+            android:layout_below="@+id/violationNumTv"
+            android:text="车牌信息"
+            style="@style/violationInfoTitleStyle"
+            />
+
+        <TextView
+            android:id="@+id/plateDetailsTv"
+            android:layout_alignTop="@+id/plateDetailsTitle"
+            android:layout_toRightOf="@+id/plateDetailsTitle"
+            style="@style/violationInfoStyle"/>
+
+
+        <TextView
+            android:id="@+id/descriptionTitle"
+            android:layout_below="@+id/plateDetailsTitle"
+            android:text="描述"
+            style="@style/violationInfoTitleStyle"/>
+
+        <TextView
+            android:id="@+id/descriptionTv"
+            android:layout_alignTop="@+id/descriptionTitle"
+            android:layout_toRightOf="@+id/descriptionTitle"
+            style="@style/violationInfoStyle"/>
+
+        <TextView
+            android:id="@+id/issueDateTitle"
+            android:layout_below="@+id/descriptionTitle"
+            android:text="发布日期"
+            style="@style/violationInfoTitleStyle"/>
+
+        <TextView
+            android:id="@+id/issueDateTv"
+            android:layout_alignTop="@+id/issueDateTitle"
+            android:layout_toRightOf="@+id/issueDateTitle"
+            style="@style/violationInfoStyle"/>
+
+        <TextView
+            android:id="@+id/liabilityTitle"
+            android:layout_below="@+id/issueDateTitle"
+            android:text="负债"
+            style="@style/violationInfoTitleStyle"/>
+
+        <TextView
+            android:id="@+id/liabilityTv"
+            android:layout_alignTop="@+id/liabilityTitle"
+            android:layout_toRightOf="@+id/liabilityTitle"
+            style="@style/violationInfoStyle"/>
+
+        <TextView
+            android:id="@+id/pendingTitle"
+            android:layout_below="@+id/liabilityTitle"
+            android:text="审核中"
+            style="@style/violationInfoTitleStyle"/>
+
+        <TextView
+            android:id="@+id/pendingTv"
+            android:layout_alignTop="@+id/pendingTitle"
+            android:layout_toRightOf="@+id/pendingTitle"
+            style="@style/violationInfoStyle"/>
+
+        <TextView
+            android:id="@+id/willPayTitle"
+            android:layout_below="@+id/pendingTitle"
+            android:text="待付款"
+            style="@style/violationInfoTitleStyle"/>
+
+        <TextView
+            android:id="@+id/willPayTv"
+            android:layout_alignTop="@+id/willPayTitle"
+            android:layout_toRightOf="@+id/willPayTitle"
+            style="@style/violationInfoStyle"/>
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+</android.support.v7.widget.CardView>

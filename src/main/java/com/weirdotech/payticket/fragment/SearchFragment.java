@@ -13,9 +13,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.weirdotech.payticket.activity.QueryResultActivity;
+import com.weirdotech.payticket.activity.SearchResultActivity;
 import com.weirdotech.payticket.R;
 import com.weirdotech.payticket.bean.PayTicketInfo;
+import com.weirdotech.payticket.constant.Constants;
 import com.weirdotech.payticket.manager.PayTicketMrg;
 import com.weirdotech.payticket.utils.Log;
 import com.weirdotech.payticket.utils.WaitDialogUtils;
@@ -25,6 +26,7 @@ import com.weirdotech.payticket.webconf.LoginResult;
 import com.weirdotech.payticket.webconf.SynBody;
 import com.weirdotech.payticket.webconf.SynResult;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 import butterknife.Bind;
@@ -36,8 +38,8 @@ import rx.Subscriber;
 /**
  * Created by Bingo on 17/5/27.
  */
-public class QueryFragment extends Fragment {
-    private static final String TAG = QueryFragment.class.getSimpleName();
+public class SearchFragment extends Fragment {
+    private static final String TAG = SearchFragment.class.getSimpleName();
 
     @Bind(R.id.operViewPager)
     protected ViewPager mViewPager;
@@ -124,7 +126,8 @@ public class QueryFragment extends Fragment {
 //                    , Toast.LENGTH_SHORT).show();
 
             //进行查询信息的显示
-            Intent intent = new Intent(getContext(), QueryResultActivity.class);
+            Intent intent = new Intent(getContext(), SearchResultActivity.class);
+            intent.putExtra(Constants.VIOLATION_INFO_KEY, (Serializable) payTicketInfo.getData());
             getActivity().startActivity(intent);
 
         }

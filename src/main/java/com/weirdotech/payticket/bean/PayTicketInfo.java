@@ -13,18 +13,6 @@ public class PayTicketInfo {
     private String code;
     private String msg;
     private String violation_group_prompt;
-    /**
-     * violation : 8509254000
-     * view_ticket : http://nycserv.nyc.gov/NYCServWeb/ShowImage?searchID=VDBSVmQwOVVTVEZPUkVGM1RVRTlQUT09
-     * plate_details : 8888 NY MED
-     * issue_date : 01/31/2017
-     * liability : 95.00
-     * pending : 0.00
-     * violation_description : 20A-No Parking (Non-COM)
-     * name : args.Violations.0.PAYMENTSELECTOR
-     * appear : true
-     * pay_enable : true
-     */
 
     private List<ViolationInfo> data;
 
