@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/tools">
     <string name="app_name">罚单</string>
 
     <string name="home">主页</string>
@@ -10,4 +10,6 @@
     <string name="confirm">确定</string>
 
     <string name="search_result_title">查询结果</string>
+    <string name="want_to_use_new_acc_to_login">是否使用新账户: %1$s, 进行登录？</string>
+
 </resources>

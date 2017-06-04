@@ -1,5 +1,6 @@
 package com.weirdotech.payticket.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import com.weirdotech.payticket.bean.RegisterResult;
 import com.weirdotech.payticket.manager.UserMrg;
 import com.weirdotech.payticket.utils.AnimationUtils;
 import com.weirdotech.payticket.utils.MainThread;
+import com.weirdotech.payticket.utils.dialog.AlertDialogUtils;
 import com.weirdotech.payticket.utils.dialog.WaitDialogUtils;
 import com.weirdotech.widgets.progress.RoundProgressBar;
 
@@ -193,7 +195,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void register() {
-        String email = mEmailEditReg.getText().toString().trim();
+        final String email = mEmailEditReg.getText().toString().trim();
         String username = mUsernameTvForReg.getText().toString().trim();
         String password = mPasswdEditReg.getText().toString().trim();
 
@@ -226,7 +228,23 @@ public class LoginActivity extends AppCompatActivity {
 
 
                         if (registerResult.getStatus_code() == 200) {
-                            Toast.makeText(LoginActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                            String dialogMsg = String.format(getString(R.string.want_to_use_new_acc_to_login), email);
+                            AlertDialogUtils.show(LoginActivity.this, "注册成功", dialogMsg,
+                                    "取消", "进行登录", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    }, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                            mHasAccBtn.performClick();
+                                            mEmailEdit.setText(mEmailEditReg.getText().toString().trim());
+                                            mPasswdEdit.setText("");
+                                            mPasswdEdit.requestFocus();
+                                        }
+                                    });
 
                         } else {
                             Toast.makeText(LoginActivity.this, "注册失败, 原因：" + registerResult.toString(),

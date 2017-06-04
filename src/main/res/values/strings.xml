@@ -17,4 +17,5 @@
     <string name="confirm">Confirm</string>
 
     <string name="search_result_title">The Search Results</string>
+    <string name="want_to_use_new_acc_to_login">Whether to use the new account: %1$s, to log in?</string>
 </resources>
