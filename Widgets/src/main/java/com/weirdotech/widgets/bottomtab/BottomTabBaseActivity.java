@@ -14,7 +14,7 @@ import java.util.List;
 
 public abstract class BottomTabBaseActivity extends AppCompatActivity {
 
-    ViewPager viewPager;
+    protected ViewPager viewPager;
     BottomTabView bottomTabView;
     FragmentPagerAdapter adapter;
 

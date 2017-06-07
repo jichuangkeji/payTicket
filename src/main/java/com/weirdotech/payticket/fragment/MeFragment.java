@@ -12,13 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wangjie.shadowviewhelper.ShadowProperty;
 import com.wangjie.shadowviewhelper.ShadowViewDrawable;
 import com.weirdotech.payticket.R;
+import com.weirdotech.payticket.activity.HomeActivity;
 import com.weirdotech.payticket.activity.LoginActivity;
-import com.weirdotech.payticket.activity.MainActivity;
 import com.weirdotech.payticket.bean.LogoutResult;
 import com.weirdotech.payticket.manager.UserMrg;
 import com.weirdotech.payticket.utils.DensityUtil;
@@ -155,23 +154,19 @@ public class MeFragment extends Fragment {
                                 if(result.isSuccess()) {
                                     mUserMrg.resetLoginResult();
 
-                                    Intent intent  = new Intent(getContext(), MainActivity.class);
+                                    Intent intent  = new Intent(getContext(), HomeActivity.class);
                                     getActivity().startActivity(intent);
                                 }
 
-                                Toast.makeText(getContext(), "成功 response.msg: "
-                                        + response.message()
-                                        + ", isSuccessfull: " + response.isSuccessful()
-                                        , Toast.LENGTH_SHORT).show();
+                                Log.e(TAG, "注销成功, " + response.message());
                                 if(result != null) {
-
                                     Log.e(TAG, " testhb logout onResponse: " + result.toString());
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<LogoutResult> call, Throwable t) {
-                                Toast.makeText(getContext(), "注销失败111 t: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                Log.e(TAG, "注销失败, " + t.getMessage());
                             }
                         });
 
