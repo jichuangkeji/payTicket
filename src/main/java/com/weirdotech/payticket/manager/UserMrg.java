@@ -16,20 +16,19 @@ import com.weirdotech.payticket.utils.StringUtils;
 import retrofit2.Call;
 import rx.Observable;
 
-import static com.weirdotech.payticket.constant.RequestConstant.IS_LOGINED;
-import static com.weirdotech.payticket.constant.RequestConstant.LOGIN_KEY_EMAIL;
-import static com.weirdotech.payticket.constant.UserConstant.IS_PREV_LOGIN;
+import static com.weirdotech.payticket.constant.UserConstant.IS_LOGINED;
+import static com.weirdotech.payticket.constant.UserConstant.*;
 
 /**
  * Created by Bingo on 17/5/17.
  */
 public class UserMrg {
-
+    private static final String TAG = UserMrg.class.getSimpleName();
     private static UserMrg sInstance;
     private IUserService mUserService;
-    private LoginResult mLoginedRsult;
     private Context mContext;
     private LoginResult mLoginedResult;
+    private LoginBody mLoginedBody;
 
     public static UserMrg getInstance() {
         if(sInstance == null) {
@@ -51,18 +50,39 @@ public class UserMrg {
         return mUserService.login(body);
     }
 
+    public Observable<LoginResult> login() {
+        LoginBody body = new LoginBody(getEmail(), getPassword());
+        return mUserService.login(body);
+    }
+
     public Call<LogoutResult> logout(String token) {
         return mUserService.logout(token);
     }
 
-    public boolean isPrevLogin() {
-        return PreferenceUtils.getPrefBoolean(mContext, IS_PREV_LOGIN, false);
+    /**
+     * 判断用户是否 成功登录了，用于下次点击软件后，进行自动登录
+     * @return
+     */
+    public boolean isLogin() {
+        return PreferenceUtils.getPrefBoolean(mContext, IS_LOGINED, false);
     }
 
+    /**
+     * 保存用户登录时候的账户信息
+     * @param body
+     */
     public void saveLoginBody(LoginBody body) {
+        mLoginedBody = body;
         PreferenceUtils.setPrefString(mContext, LOGIN_KEY_EMAIL, body.email);
+        PreferenceUtils.setPrefString(mContext, LOGIN_KEY_PASSWORD, body.password);
     }
 
+    /**
+     * 保存 登录后的 响应信息，
+     * （1）错误码 和 提示信息
+     * （2）是否成功登录的标志位
+     * @param result
+     */
     public void saveLoginResult(LoginResult result) {
         PreferenceUtils.setPrefBoolean(mContext, IS_LOGINED, result.isLogined());
 
@@ -72,16 +92,17 @@ public class UserMrg {
     }
 
     public void resetLoginResult() {
+        mLoginedBody = null;
         PreferenceUtils.setPrefBoolean(mContext, IS_LOGINED, false);
         mLoginedResult = null;
     }
 
-    public boolean isLogined() {
-        return PreferenceUtils.getPrefBoolean(mContext, IS_LOGINED, false);
-    }
-
     public String getEmail() {
         return PreferenceUtils.getPrefString(mContext, LOGIN_KEY_EMAIL, "");
+    }
+
+    private String getPassword() {
+        return PreferenceUtils.getPrefString(mContext, LOGIN_KEY_PASSWORD, "");
     }
 
     public LoginResult getLoginedResult() {

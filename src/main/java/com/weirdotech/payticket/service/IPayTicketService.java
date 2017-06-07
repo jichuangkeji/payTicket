@@ -21,5 +21,5 @@ public interface IPayTicketService {
     Observable<PayTicketInfo> listTickets(@Path(SEARCH_KEY) String searchKey);
 
     @GET
-    Call<ResponseBody> showImage(@Url String uril);
+    Call<ResponseBody> showImage(@Url String url);
 }

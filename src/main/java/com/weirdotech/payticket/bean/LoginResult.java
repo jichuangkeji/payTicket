@@ -1,5 +1,7 @@
 package com.weirdotech.payticket.bean;
 
+import com.weirdotech.payticket.utils.StringUtils;
+
 /**
  * Created by Bingo on 17/5/18.
  */
@@ -147,13 +149,10 @@ public class LoginResult {
     }
 
     public boolean isLogined() {
-        boolean isSuccess = true;
+        boolean isSuccess = false;
         //判断成功
-        if(error_code == 0 && code.equals("200")) {
+        if(!StringUtils.isNullOrEmpty(code) && code.equals("200")) {
             isSuccess = true;
-
-        } else if(code == null && error_code == 100) {
-            isSuccess = false;
         }
 
         return isSuccess;

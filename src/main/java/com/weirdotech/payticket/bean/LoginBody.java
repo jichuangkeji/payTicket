@@ -11,4 +11,9 @@ public class LoginBody {
         this.email = email;
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "[email: " + email + ", password " + password + "]";
+    }
 }

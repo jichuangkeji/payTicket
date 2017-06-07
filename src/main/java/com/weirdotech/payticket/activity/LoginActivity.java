@@ -11,11 +11,11 @@ import android.widget.Toast;
 
 import com.weirdotech.payticket.R;
 import com.weirdotech.payticket.bean.LoginBody;
-import com.weirdotech.payticket.bean.LoginResult;
 import com.weirdotech.payticket.bean.RegisterBody;
 import com.weirdotech.payticket.bean.RegisterResult;
 import com.weirdotech.payticket.manager.UserMrg;
 import com.weirdotech.payticket.utils.AnimationUtils;
+import com.weirdotech.payticket.utils.Login;
 import com.weirdotech.payticket.utils.MainThread;
 import com.weirdotech.payticket.utils.dialog.AlertDialogUtils;
 import com.weirdotech.payticket.utils.dialog.WaitDialogUtils;
@@ -98,7 +98,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setView() {
         mEmailEdit.setText(mUserMrg.getEmail());
-        mPasswdEdit.requestFocus();
+        if(!mEmailEdit.getText().toString().trim().equals("")) {
+            mPasswdEdit.requestFocus();
+        }
+
     }
 
     @OnClick(R.id.noAccTipBtn)
@@ -132,48 +135,49 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginBtnClick() {
         String email = mEmailEdit.getText().toString().trim();
         String password = mPasswdEdit.getText().toString().trim();
-        LoginBody body = new LoginBody(email, password);
-        mUserMrg.saveLoginBody(body);
+        LoginBody loginBody = new LoginBody(email, password);
+        mUserMrg.saveLoginBody(loginBody);
 
-        mUserMrg.login(body)
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<LoginResult>() {
-
-                    @Override
-                    public void onStart() {
-                        super.onStart();
-                        WaitDialogUtils.show(TAG, LoginActivity.this);
-                    }
-
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        WaitDialogUtils.hide(TAG);
-                        Toast.makeText(LoginActivity.this, "登录失败111 t: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onNext(LoginResult loginResult) {
-                        WaitDialogUtils.hide(TAG);
-
-                        mUserMrg.saveLoginResult(loginResult);
-
-                        if (loginResult.isLogined()) {
-                            handleLoginEvent();
-                            Toast.makeText(LoginActivity.this, loginResult.getLoginResultMsg(), Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(LoginActivity.this, loginResult.toString(), Toast.LENGTH_SHORT).show();
-                        }
-
-
-
-                    }
-                });
+        Login.login(mUserMrg, loginBody, this, TAG);
+//        mUserMrg.login(body)
+//                .subscribeOn(Schedulers.computation())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<LoginResult>() {
+//
+//                    @Override
+//                    public void onStart() {
+//                        super.onStart();
+//                        WaitDialogUtils.show(TAG, LoginActivity.this);
+//                    }
+//
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        WaitDialogUtils.hide(TAG);
+//                        Toast.makeText(LoginActivity.this, "登录失败111 t: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void onNext(LoginResult loginResult) {
+//                        WaitDialogUtils.hide(TAG);
+//
+//                        mUserMrg.saveLoginResult(loginResult);
+//
+//                        if (loginResult.isLogined()) {
+//                            handleLoginEvent();
+//                            Toast.makeText(LoginActivity.this, loginResult.getLoginResultMsg(), Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(LoginActivity.this, loginResult.toString(), Toast.LENGTH_SHORT).show();
+//                        }
+//
+//
+//
+//                    }
+//                });
     }
 
     @OnClick(R.id.registerBtn)
