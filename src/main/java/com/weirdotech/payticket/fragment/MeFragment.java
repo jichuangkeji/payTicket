@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.wangjie.shadowviewhelper.ShadowProperty;
 import com.wangjie.shadowviewhelper.ShadowViewDrawable;
 import com.weirdotech.payticket.R;
+import com.weirdotech.payticket.activity.LoginActivity;
 import com.weirdotech.payticket.activity.MainActivity;
 import com.weirdotech.payticket.bean.LogoutResult;
 import com.weirdotech.payticket.manager.UserMrg;
@@ -48,6 +49,9 @@ public class MeFragment extends Fragment {
     @Bind(R.id.logoutBtn)
     protected View mLogoutBtn;
 
+    @Bind(R.id.regLoginBtn)
+    protected View mRegLoginBtn;
+
     private UserMrg mUserMrg;
 
     @Override
@@ -65,9 +69,27 @@ public class MeFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        renderView();
+    }
 
     private void initModel() {
         mUserMrg = UserMrg.getInstance();
+    }
+
+    private void renderView() {
+        if(mUserMrg.isLogin()) {
+            mUsernameTv.setText(mUserMrg.getEmail());
+            mLogoutBtn.setVisibility(View.VISIBLE);
+            mRegLoginBtn.setVisibility(View.GONE);
+        } else {
+            mUsernameTv.setText("未登录");
+            mLogoutBtn.setVisibility(View.GONE);
+            mRegLoginBtn.setVisibility(View.VISIBLE);
+
+        }
     }
 
     private void setView() {
@@ -85,8 +107,8 @@ public class MeFragment extends Fragment {
         ViewCompat.setBackground(mLogoutBtn, sd);
         ViewCompat.setLayerType(mLogoutBtn, ViewCompat.LAYER_TYPE_SOFTWARE, null);
 
-        mUsernameTv.setText(mUserMrg.getEmail());
-
+        ViewCompat.setBackground(mRegLoginBtn, sd);
+        ViewCompat.setLayerType(mRegLoginBtn, ViewCompat.LAYER_TYPE_SOFTWARE, null);
 
     }
 
@@ -98,6 +120,12 @@ public class MeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.me_fragment_layout, container, false);
         ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    @OnClick(R.id.regLoginBtn)
+    public void onRegLoginBtnClick() {
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        getActivity().startActivity(intent);
     }
 
     @OnClick(R.id.logoutBtn)
