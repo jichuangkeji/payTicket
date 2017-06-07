@@ -4,7 +4,9 @@ package com.weirdotech.payticket.constant;
  * Created by Bingo on 17/5/13.
  */
 public class RequestConstant {
-    public static final String SERVER_URL = "https://www.guufar.com/api/";
+    //测试用的
+    public static final String SERVER_URL = "http://54.144.70.64/api/";
+//    public static final String SERVER_URL = "https://www.guufar.com/api/";
 
     //查询罚单 QUERY
     public static final String SEARCH_KEY = "searchKey";
