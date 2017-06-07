@@ -96,12 +96,19 @@ public class SearchFragment extends Fragment {
     }
 
     private void setView() {
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        renderView();
+    }
+
+    private void renderView() {
         if (mUserMrg.isLogin() && mUserMrg.getLoginedResult() != null) {
             Log.e(TAG, " 进行显示查询记录");
-           renderSearchLogs();
+            renderSearchLogs();
         }
-
     }
 
     private void renderSearchLogs(){
