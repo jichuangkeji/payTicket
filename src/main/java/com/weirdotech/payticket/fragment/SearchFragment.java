@@ -9,15 +9,20 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.weirdotech.payticket.R;
 import com.weirdotech.payticket.activity.SearchResultActivity;
+import com.weirdotech.payticket.adapter.SearchLogAdapter;
 import com.weirdotech.payticket.bean.PayTicketInfo;
+import com.weirdotech.payticket.bean.SearchLog;
+import com.weirdotech.payticket.bean.SearchLogItem;
 import com.weirdotech.payticket.constant.Constants;
 import com.weirdotech.payticket.manager.PayTicketMrg;
+import com.weirdotech.payticket.manager.UserMrg;
 import com.weirdotech.payticket.utils.Log;
 import com.weirdotech.payticket.utils.StringUtils;
 import com.weirdotech.payticket.utils.dialog.WaitDialogUtils;
@@ -55,11 +60,14 @@ public class SearchFragment extends Fragment {
 
     @Bind(R.id.contactLv)
     protected ListView mLv;
+    @Bind(R.id.logItemLv)
+    protected ListView mLogItemlv;
 
     public LoginResult mResult;
     private ConfContactMrg mMrg;
     protected ContactAdapter mAdapter;
     private PayTicketMrg mPayTicketMrg;
+    private UserMrg mUserMrg;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,10 +79,11 @@ public class SearchFragment extends Fragment {
     private void initModel() {
         mMrg = ConfContactMrg.createInstance(getContext());
         mPayTicketMrg = PayTicketMrg.getInstance();
-
+        mUserMrg = UserMrg.getInstance();
     }
 
     private void iniData() {
+
     }
 
     @Nullable
@@ -87,15 +96,55 @@ public class SearchFragment extends Fragment {
     }
 
     private void setView() {
+
+        if (mUserMrg.isLogin() && mUserMrg.getLoginedResult() != null) {
+            Log.e(TAG, " 进行显示查询记录");
+           renderSearchLogs();
+        }
+
+    }
+
+    private void renderSearchLogs(){
+        String token = mUserMrg.getLoginedResult().getData().getToken();
+        mPayTicketMrg.listSearchLogs(token, new Subscriber<SearchLog>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, " renderSearchLogs onError: " + e.getMessage());
+            }
+
+            @Override
+            public void onNext(SearchLog searchLog) {
+                Log.e(TAG, " renderSearchLogs searchLog: " + searchLog.toString());
+                SearchLogAdapter mSearchLogAdapter = new SearchLogAdapter(getContext(), searchLog.getData());
+                mLogItemlv.setAdapter(mSearchLogAdapter);
+            }
+        });
     }
 
     private void initListener() {
+
+        mLogItemlv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if(parent.getAdapter() instanceof SearchLogAdapter) {
+                    SearchLogItem item = ((SearchLogAdapter)parent.getAdapter()).getItem(position);
+                    listTickets(item.getPlate());
+                }
+
+            }
+        });
 
     }
 
     private View initView(LayoutInflater inflater, ViewGroup container) {
         View rootView = inflater.inflate(
-                R.layout.query_fragment_layout, container, false);
+                R.layout.search_fragment_layout, container, false);
         ButterKnife.bind(this, rootView);
         return rootView;
     }
@@ -139,12 +188,17 @@ public class SearchFragment extends Fragment {
     public void onSearchBtnClick() {
         String searchKey = mSearchKeyEdit.getText().toString().trim();
         Log.d(TAG, " searchKey: " + searchKey);
-        if(StringUtils.isNullOrEmpty(searchKey)) {
+        if (StringUtils.isNullOrEmpty(searchKey)) {
             Toast.makeText(getContext(), "请输入车牌号或者罚单号", Toast.LENGTH_SHORT).show();
         } else {
-            mPayTicketMrg.listTickets(searchKey, new SearchSubscribe());
+            listTickets(searchKey);
+
         }
 
+    }
+
+    private void listTickets(String searchKey) {
+        mPayTicketMrg.listTickets(searchKey, new SearchSubscribe());
     }
 
     @OnClick(R.id.queryBtn)
@@ -158,7 +212,7 @@ public class SearchFragment extends Fragment {
             public void onCompleted() {
                 SynBody body = new SynBody();
                 body.setEnterpriseId(mResult.getEnterpriseId());
-                Integer[] flags = new Integer[]{1,2,3};
+                Integer[] flags = new Integer[]{1, 2, 3};
                 body.setFlag(Arrays.asList(flags));
 
                 mMrg.synEnterprise(mResult.getToken(), body, new Subscriber<SynResult>() {
@@ -175,7 +229,7 @@ public class SearchFragment extends Fragment {
                     @Override
                     public void onNext(SynResult synResult) {
                         Log.e(TAG, " tetshb date is update ");
-                        if(mAdapter == null) {
+                        if (mAdapter == null) {
                             mAdapter = new ContactAdapter(synResult.getDeparts(), getContext());
                             mLv.setAdapter(mAdapter);
                         } else {
@@ -197,6 +251,21 @@ public class SearchFragment extends Fragment {
                 mResult = loginResult;
             }
         });
+    }
+
+    @OnClick(R.id.searchLogBtn)
+    public void onSearcgLogBtnClick() {
+        Toast.makeText(getContext(), "searchLogBtn", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.payLogBtn)
+    public void onPayLogBtnClick() {
+        Toast.makeText(getContext(), "payLogBtn", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.unPayLogBtn)
+    public void onNnPayLogBtnClick() {
+        Toast.makeText(getContext(), "unPayLogBtn", Toast.LENGTH_SHORT).show();
     }
 
 }

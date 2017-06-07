@@ -29,4 +29,7 @@ public class RequestConstant {
     //用户注销 GET
     public static final String LOGOUT_PATH        = "user/logout";
 
+    //查询记录
+    public static final String SEARCH_LOG_PATH = "search_history";
+
 }

@@ -14,46 +14,75 @@
     <com.zhy.android.percent.support.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_heightPercent="30%h"
+        android:background="@drawable/query_result_bg"
         android:orientation="vertical"
-        android:background="@drawable/query_result_bg">
+        app:layout_heightPercent="25%h">
 
         <EditText
             android:id="@+id/searchKeyEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_widthPercent="80%w"
-            app:layout_heightPercent="30%h"
-            app:layout_marginTopPercent="10%h"
-            android:text="8888"
             android:layout_gravity="center_horizontal"
-            />
+            android:text="8888"
+            app:layout_heightPercent="34%h"
+            app:layout_marginTopPercent="10%h"
+            app:layout_widthPercent="80%w" />
 
         <TextView
             android:id="@+id/searchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_widthPercent="80%w"
-            app:layout_heightPercent="22%h"
-            app:layout_marginTopPercent="10%h"
-            android:text="搜索"
+            android:layout_gravity="center_horizontal"
             android:background="#fff"
             android:gravity="center"
-            android:textSize="20sp"
+            android:text="搜索"
             android:textColor="#000"
-            android:layout_gravity="center_horizontal"/>
+            android:textSize="20sp"
+            app:layout_heightPercent="28%h"
+            app:layout_marginTopPercent="10%h"
+            app:layout_widthPercent="80%w" />
 
     </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_heightPercent="5%h">
+
+        <TextView
+            android:id="@+id/searchLogBtn"
+            style="@style/logTypeBtnStyle"
+            android:text="查询记录"
+            />
+
+        <TextView
+            android:id="@+id/payLogBtn"
+            style="@style/logTypeBtnStyle"
+            android:text="付款记录"
+            />
+
+        <TextView
+            android:id="@+id/unPayLogBtn"
+            style="@style/logTypeBtnStyle"
+            android:text="待支付记录"
+            />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/logItemLv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        app:layout_heightPercent="60%h"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/operViewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_heightPercent="40%h"
         android:background="#ff0"
         android:visibility="gone"
-        />
-
+        app:layout_heightPercent="40%h" />
 
 
     <!-- 以下是测试  web contact的代码 -->
@@ -62,18 +91,15 @@
         android:id="@+id/contactLv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_heightPercent="80%h"
         android:background="#f00"
         android:visibility="gone"
-        />
+        app:layout_heightPercent="80%h" />
 
     <Button
         android:id="@+id/queryBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        />
-
+        android:visibility="gone" />
 
 
 </com.zhy.android.percent.support.PercentLinearLayout>

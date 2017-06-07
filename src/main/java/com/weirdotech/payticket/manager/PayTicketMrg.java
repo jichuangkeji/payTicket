@@ -1,6 +1,7 @@
 package com.weirdotech.payticket.manager;
 
 import com.weirdotech.payticket.bean.PayTicketInfo;
+import com.weirdotech.payticket.bean.SearchLog;
 import com.weirdotech.payticket.service.IPayTicketService;
 import com.weirdotech.payticket.service.RetrofitWrapper;
 
@@ -28,6 +29,13 @@ public class PayTicketMrg {
 
     public void listTickets(String searchKey, Subscriber<PayTicketInfo> subscriber) {
         mPayTicketService.listTickets(searchKey)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void listSearchLogs(String token, Subscriber<SearchLog> subscriber) {
+        mPayTicketService.listSearchLogs(token)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);

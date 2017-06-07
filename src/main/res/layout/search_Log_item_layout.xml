@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/createTv"
+        style="@style/logItemFirstTvStyle" />
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/createTv"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/plateTitle"
+            style="@style/logItemFirstTvStyle"
+            android:text="车牌号：" />
+
+        <TextView
+            android:id="@+id/plateTv"
+            style="@style/logItemTitleStyle" />
+
+        <TextView
+            android:id="@+id/payNumTitle"
+            style="@style/logItemTitleStyle"
+            android:text="需付金额："
+            app:layout_marginLeftPercent="35%w" />
+
+        <TextView
+            android:id="@+id/payNumTv"
+            style="@style/logItemTitleStyle"
+            android:textColor="@color/primaryBlueColor"
+            />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/logItemFirstTvStyle"
+            android:text="罚单数：" />
+
+        <TextView
+            android:id="@+id/ticketNumTv"
+            style="@style/logItemTitleStyle" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+</com.zhy.android.percent.support.PercentLinearLayout>
