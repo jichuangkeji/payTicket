@@ -13,12 +13,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.weirdotech.payticket.activity.SearchResultActivity;
 import com.weirdotech.payticket.R;
+import com.weirdotech.payticket.activity.SearchResultActivity;
 import com.weirdotech.payticket.bean.PayTicketInfo;
 import com.weirdotech.payticket.constant.Constants;
 import com.weirdotech.payticket.manager.PayTicketMrg;
 import com.weirdotech.payticket.utils.Log;
+import com.weirdotech.payticket.utils.StringUtils;
 import com.weirdotech.payticket.utils.dialog.WaitDialogUtils;
 import com.weirdotech.payticket.webconf.ConfContactMrg;
 import com.weirdotech.payticket.webconf.ContactAdapter;
@@ -137,8 +138,13 @@ public class SearchFragment extends Fragment {
     @OnClick(R.id.searchBtn)
     public void onSearchBtnClick() {
         String searchKey = mSearchKeyEdit.getText().toString().trim();
-        Log.e(TAG, " searchKey: " + searchKey);
-        mPayTicketMrg.listTickets(searchKey, new SearchSubscribe());
+        Log.d(TAG, " searchKey: " + searchKey);
+        if(StringUtils.isNullOrEmpty(searchKey)) {
+            Toast.makeText(getContext(), "请输入车牌号或者罚单号", Toast.LENGTH_SHORT).show();
+        } else {
+            mPayTicketMrg.listTickets(searchKey, new SearchSubscribe());
+        }
+
     }
 
     @OnClick(R.id.queryBtn)
