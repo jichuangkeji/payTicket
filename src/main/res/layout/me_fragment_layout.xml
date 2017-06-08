@@ -31,10 +31,38 @@
         <TextView
             android:id="@+id/usernameTv"
             android:layout_gravity="center_vertical"
+            app:layout_marginLeftPercent="5%w"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"/>
     </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:id="@+id/meItemLayout1"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        app:layout_heightPercent="24%h"
+        android:layout_height="wrap_content">
+
+        <com.weirdotech.payticket.widgets.MeItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_heightPercent="50%h"
+            app:itemIcon="@drawable/search_icon"
+            app:layout_marginTopPercent="@string/me_item_margin_top_percent"
+            app:itemTitle="Payment"
+            />
+
+        <com.weirdotech.payticket.widgets.MeItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_heightPercent="50%h"
+            app:itemIcon="@drawable/search_icon"
+            app:itemTitle="联系我们"
+            />
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
 
     <TextView
         android:id="@+id/logoutBtn"

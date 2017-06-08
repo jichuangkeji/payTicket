@@ -32,4 +32,7 @@ public class RequestConstant {
     //查询记录
     public static final String SEARCH_LOG_PATH = "search_history";
 
+    //add Card
+    public static final String CREATE_CARD = "card/add";
+
 }

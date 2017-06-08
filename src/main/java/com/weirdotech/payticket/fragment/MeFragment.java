@@ -51,6 +51,9 @@ public class MeFragment extends Fragment {
     @Bind(R.id.regLoginBtn)
     protected View mRegLoginBtn;
 
+    @Bind(R.id.meItemLayout1)
+    protected View mMeItemLayout1;
+
     private UserMrg mUserMrg;
 
     @Override
@@ -88,6 +91,7 @@ public class MeFragment extends Fragment {
             mLogoutBtn.setVisibility(View.GONE);
             mRegLoginBtn.setVisibility(View.VISIBLE);
 
+
         }
     }
 
@@ -103,13 +107,18 @@ public class MeFragment extends Fragment {
         ViewCompat.setBackground(mPersonalView, sd);
         ViewCompat.setLayerType(mPersonalView, ViewCompat.LAYER_TYPE_SOFTWARE, null);
 
+
         ViewCompat.setBackground(mLogoutBtn, sd);
         ViewCompat.setLayerType(mLogoutBtn, ViewCompat.LAYER_TYPE_SOFTWARE, null);
 
         ViewCompat.setBackground(mRegLoginBtn, sd);
         ViewCompat.setLayerType(mRegLoginBtn, ViewCompat.LAYER_TYPE_SOFTWARE, null);
 
+        ViewCompat.setBackground(mMeItemLayout1, sd);
+        ViewCompat.setLayerType(mMeItemLayout1, ViewCompat.LAYER_TYPE_SOFTWARE, null);
+
     }
+
 
     private void initListener() {
 
@@ -130,7 +139,7 @@ public class MeFragment extends Fragment {
     @OnClick(R.id.logoutBtn)
     public void onLogoutBtnClick() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        Log.d("", "onLogoutBtnClick: token:" + mUserMrg.getLoginedResult().getData().getToken());
+        Log.d("", "onLogoutBtnClick: token:" + mUserMrg.getLoginedResult().getLoginInfo().getToken());
         builder.setMessage("是否确认退出登录?")
                 .setTitle("退出登录")
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -142,7 +151,7 @@ public class MeFragment extends Fragment {
                 }).setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String token = mUserMrg.getLoginedResult().getData().getToken();
+                        String token = mUserMrg.getLoginedResult().getLoginInfo().getToken();
                         Log.e(TAG, " testhb logout token: " + token);
                         Call<LogoutResult> logoutCall = mUserMrg.logout(token);
 

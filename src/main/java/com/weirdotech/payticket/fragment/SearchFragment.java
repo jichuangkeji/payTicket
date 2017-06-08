@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.weirdotech.payticket.R;
 import com.weirdotech.payticket.activity.SearchResultActivity;
 import com.weirdotech.payticket.adapter.SearchLogAdapter;
+import com.weirdotech.payticket.bean.CreateCardBody;
+import com.weirdotech.payticket.bean.CreateCardResult;
 import com.weirdotech.payticket.bean.PayTicketInfo;
 import com.weirdotech.payticket.bean.SearchLog;
 import com.weirdotech.payticket.bean.SearchLogItem;
@@ -39,6 +41,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 /**
@@ -105,14 +109,39 @@ public class SearchFragment extends Fragment {
     }
 
     private void renderView() {
+
+
         if (mUserMrg.isLogin() && mUserMrg.getLoginedResult() != null) {
             Log.e(TAG, " 进行显示查询记录");
             renderSearchLogs();
+
+            CreateCardBody body = new CreateCardBody("4242424242424242", "20", "12", "203", "bingo");
+            mUserMrg.createCard(mUserMrg.getLoginedResult().getLoginInfo().getToken(),body)
+                    .subscribeOn(Schedulers.computation())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Subscriber<CreateCardResult>() {
+                        @Override
+                        public void onCompleted() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.e(TAG, " createCard onError: " + e.getMessage());
+                        }
+
+                        @Override
+                        public void onNext(CreateCardResult createCardResult) {
+                            Log.e(TAG, " createCard onNext: " + createCardResult.toString());
+                        }
+                    });
         }
     }
 
     private void renderSearchLogs(){
-        String token = mUserMrg.getLoginedResult().getData().getToken();
+        Log.e(TAG, "renderSearchLogs loginResult: " + mUserMrg.getLoginedResult()
+        + ", loginInfo: " + mUserMrg.getLoginedResult().getLoginInfo());
+        String token = mUserMrg.getLoginedResult().getLoginInfo().getToken();
         mPayTicketMrg.listSearchLogs(token, new Subscriber<SearchLog>() {
             @Override
             public void onCompleted() {

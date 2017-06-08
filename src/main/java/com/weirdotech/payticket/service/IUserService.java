@@ -1,5 +1,7 @@
 package com.weirdotech.payticket.service;
 
+import com.weirdotech.payticket.bean.CreateCardBody;
+import com.weirdotech.payticket.bean.CreateCardResult;
 import com.weirdotech.payticket.bean.LoginBody;
 import com.weirdotech.payticket.bean.LoginResult;
 import com.weirdotech.payticket.bean.LogoutResult;
@@ -13,6 +15,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 
+import static com.weirdotech.payticket.constant.RequestConstant.CREATE_CARD;
 import static com.weirdotech.payticket.constant.RequestConstant.LOGIN_PATH;
 import static com.weirdotech.payticket.constant.RequestConstant.LOGOUT_PATH;
 import static com.weirdotech.payticket.constant.RequestConstant.REGISTER_PATH;
@@ -30,4 +33,7 @@ public interface IUserService {
 
     @GET(LOGOUT_PATH)
     Call<LogoutResult> logout(@Query("token") String token);
+
+    @POST(CREATE_CARD)
+    Observable<CreateCardResult> createCard(@Query("token") String token, @Body CreateCardBody body);
 }

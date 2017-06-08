@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PrefsSeekBar -->
+    <declare-styleable name="meItemStyle">
+        <attr name="itemIcon" format="reference" />
+        <attr name="itemTitle" format="string" />
+    </declare-styleable>
+
+</resources>

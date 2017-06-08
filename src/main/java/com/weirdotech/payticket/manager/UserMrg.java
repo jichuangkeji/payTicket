@@ -3,6 +3,9 @@ package com.weirdotech.payticket.manager;
 import android.content.Context;
 
 import com.weirdotech.payticket.PayTicketApplication;
+import com.weirdotech.payticket.bean.CardInfo;
+import com.weirdotech.payticket.bean.CreateCardBody;
+import com.weirdotech.payticket.bean.CreateCardResult;
 import com.weirdotech.payticket.bean.LoginBody;
 import com.weirdotech.payticket.bean.LoginResult;
 import com.weirdotech.payticket.bean.LogoutResult;
@@ -13,11 +16,17 @@ import com.weirdotech.payticket.service.RetrofitWrapper;
 import com.weirdotech.payticket.utils.PreferenceUtils;
 import com.weirdotech.payticket.utils.StringUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import retrofit2.Call;
 import rx.Observable;
 
 import static com.weirdotech.payticket.constant.UserConstant.IS_LOGINED;
-import static com.weirdotech.payticket.constant.UserConstant.*;
+import static com.weirdotech.payticket.constant.UserConstant.LOGIN_KEY_EMAIL;
+import static com.weirdotech.payticket.constant.UserConstant.LOGIN_KEY_PASSWORD;
 
 /**
  * Created by Bingo on 17/5/17.
@@ -29,6 +38,9 @@ public class UserMrg {
     private Context mContext;
     private LoginResult mLoginedResult;
     private LoginBody mLoginedBody;
+    private Map<String, CardInfo> mCardMap = new HashMap<>();
+    private List<CardInfo> mCards = new ArrayList<>();
+
 
     public static UserMrg getInstance() {
         if(sInstance == null) {
@@ -113,8 +125,8 @@ public class UserMrg {
         String username = "";
 
         if(mLoginedResult != null
-                && !StringUtils.isNullOrEmpty((String)mLoginedResult.getData().getName())) {
-            username = (String)mLoginedResult.getData().getName();
+                && !StringUtils.isNullOrEmpty((String)mLoginedResult.getLoginInfo().getName())) {
+            username = (String)mLoginedResult.getLoginInfo().getName();
         }
 
         return username;
@@ -122,6 +134,10 @@ public class UserMrg {
 
     public void logout() {
         mLoginedResult = null;
+    }
+
+    public Observable<CreateCardResult> createCard(String token, CreateCardBody body){
+        return mUserService.createCard(token, body);
     }
 
 

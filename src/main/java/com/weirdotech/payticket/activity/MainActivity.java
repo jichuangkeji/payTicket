@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(LoginResult loginResult) {
-                        Log.e(TAG, " doAutoLogin onNext loginResult: " + loginResult.toString());
+                        Log.e(TAG, " doAutoLogin onNext loginResult: " + loginResult.toString() + ", loginInfo: " + loginResult.getLoginInfo());
                         mUserMrg.saveLoginResult(loginResult);
                     }
                 });
